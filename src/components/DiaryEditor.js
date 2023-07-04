@@ -1,6 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const DiaryEditor = ({ onCreate }) => {
+const DiaryEditor = React.memo(({ onCreate }) => {
+  useEffect(() => {
+    console.log("DiaryEditor 렌더");
+  });
   const authorInput = useRef();
   const contentInput = useRef();
 
@@ -42,22 +45,26 @@ const DiaryEditor = ({ onCreate }) => {
       <h2>오늘의 일기</h2>
       <div>
         <input
-          name='author'
           ref={authorInput}
           value={state.author}
           onChange={handleChangeState}
+          name='author'
+          placeholder='작성자'
+          type='text'
         />
       </div>
       <div>
         <textarea
-          name='content'
           ref={contentInput}
           value={state.content}
           onChange={handleChangeState}
+          name='content'
+          placeholder='일기'
+          type='text'
         />
       </div>
       <div>
-        오늘의 감정점수:
+        <span>오늘의 감정점수 : </span>
         <select
           name='emotion'
           value={state.emotion}
@@ -70,9 +77,10 @@ const DiaryEditor = ({ onCreate }) => {
           <option value={5}>5</option>
         </select>
       </div>
-      <button onClick={handleSubmit}>저장</button>
+      <div>
+        <button onClick={handleSubmit}>일기 저장하기</button>
+      </div>
     </div>
   );
-};
-
-export default React.memo(DiaryEditor);
+});
+export default DiaryEditor;

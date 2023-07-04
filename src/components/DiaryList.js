@@ -1,4 +1,3 @@
-import React from "react";
 import DiaryItem from "./DiaryItem";
 
 const DiaryList = ({ onEdit, onRemove, diaryList }) => {
@@ -7,22 +6,15 @@ const DiaryList = ({ onEdit, onRemove, diaryList }) => {
       <h2>일기 리스트</h2>
       <h4>{diaryList.length}개의 일기가 있습니다.</h4>
       <div>
-        {diaryList.map((it) => {
-          return (
-            <DiaryItem
-              key={it.id}
-              {...it}
-              onEdit={onEdit}
-              onRemove={onRemove}
-            />
-          );
-        })}
+        {diaryList.map((it) => (
+          <DiaryItem key={it.id} {...it} onEdit={onEdit} onRemove={onRemove} />
+        ))}
       </div>
     </div>
   );
 };
 
-DiaryList.defaultProp = {
+DiaryList.defaultProps = {
   diaryList: [],
 };
 
